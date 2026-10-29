@@ -90,7 +90,7 @@ def main():
             r = 1 if (m is insercao and len(amostra) >= 5000 and escolhido != "insercao") else rep
             t_ms = medir_funcao(m, entradas, repeticoes=r)
             if t_ms < 0.1:
-                celulas.append(f"{t_ms * 1000:>9.2f} µs")
+                celulas.append(f"{t_ms:>9.4f} ms")
             else:
                 celulas.append(f"{t_ms:>9.2f} ms")
         print(f"{nome:<28} | " + " | ".join(celulas) + f" | {escolhido}")
@@ -102,8 +102,8 @@ def main():
         t_esc = medir_funcao(escolher, entradas, repeticoes=rep * 5)
         t_ord = medir_funcao(ordenar, entradas, repeticoes=rep)
         frac = (t_esc / t_ord) * 100 if t_ord > 0 else 0
-        fmt_esc = f"{t_esc * 1000:.2f} µs" if t_esc < 0.1 else f"{t_esc:.3f} ms"
-        fmt_ord = f"{t_ord * 1000:.2f} µs" if t_ord < 0.1 else f"{t_ord:.3f} ms"
+        fmt_esc = f"{t_esc:.5f} ms" if t_esc < 0.01 else f"{t_esc:.3f} ms"
+        fmt_ord = f"{t_ord:.4f} ms" if t_ord < 0.1 else f"{t_ord:.3f} ms"
         print(f"{nome:<28} | {fmt_esc:>14} | {fmt_ord:>14} | {frac:>14.1f}%")
 
     print("\n=== Cenário em que o escolher erra a decisão ===\n")
